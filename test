@@ -1,0 +1,94 @@
+require 'tk'
+
+root = TkRoot.new('height' => "800",
+		  'width'  => "1200")
+		  
+		   
+root.title = "Eagle Eye"
+
+entry1 = TkEntry.new(root) do
+
+end
+
+list = TkListbox.new(root) do 
+	setgrid 1
+	selectmode 'multiple'
+	
+end
+
+list.insert 0, "Ping", "Nslookup", "nmap", "netstat", "Traceroute",
+"6", "7", "8", "9", "10"
+
+outb = TkText.new(root) do 
+
+end
+
+def ping_cmd(hostname, box)
+	if hostname == ""
+		box.insert 'end', "Enter Host or Ip"
+	else
+		cmd = "ping -c 10 " + hostname
+		box.insert 'end', `#{cmd}`
+	end
+end
+
+def nslookup_cmd(hostname, box)
+	if hostname == ""
+		box.insert 'end', "Enter Host or Ip"
+	else
+		cmd = "nslookup " + hostname
+		box.insert 'end', `#{cmd}`
+	end
+end
+
+def nmap_cmd(hostname, box)
+	if hostname == ""
+		box.insert 'end', "Enter Host or Ip"
+	else
+		cmd = "nmap " + hostname
+		box.insert 'end', `#{cmd}`
+	end
+end
+
+def netstat_cmd(hostname, box)
+	if hostname == ""
+		box.insert 'end', "Enter Host or Ip"
+	else
+		cmd = "netstat " + hostname
+		box.insert 'end', `#{cmd}`
+	end
+end
+
+def traceroute_cmd(hostname, box)
+	if hostname == ""
+		box.insert 'end', "Enter Host or Ip"
+	else
+		cmd = "traceroute " + hostname
+		box.insert 'end', `#{cmd}`
+	end
+end
+
+TkButton.new {
+	text 'quit '
+	command 'exit'
+	place('x'     => 0,
+	      'y'     => 30)
+}
+
+entry1.place('height' => 25,
+	     'width'  => 150,
+	     'x'      => 0,
+	     'y'      => 0)
+	     
+list.place('height'   => 160,
+	   'width'    => 130,
+	   'x'        => 900,
+	   'y'        => 120)
+
+
+outb.place('height'   => 400,
+	   'width'    => 900,
+	   'x'        => 0,
+	   'y'        => 120)
+
+Tk.mainloop	     
